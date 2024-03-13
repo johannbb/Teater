@@ -156,7 +156,9 @@ INSERT INTO Forestilling (Tittel, Dato, Starttid) VALUES ('Størst av alt er kj�
 INSERT INTO Forestilling (Tittel, Dato, Starttid) VALUES ('Størst av alt er kjærligheten', '2024-02-13', '18:30:00');
 INSERT INTO Forestilling (Tittel, Dato, Starttid) VALUES ('Størst av alt er kjærligheten', '2024-02-14', '18:30:00');
 
--- Stol
+-- Stoler
+
+-- Gamlescenen parkett
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (1, 1, 1, 'Parkett', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (2, 2, 1, 'Parkett', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (3, 3, 1, 'Parkett', 2);
@@ -328,7 +330,7 @@ INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (168, 12, 10, 'P
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (169, 13, 10, 'Parkett', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (170, 14, 10, 'Parkett', 2);
 
-
+-- Gamlescenen balkong
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (171, 1, 1, 'Balkong', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (172, 2, 1, 'Balkong', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (173, 3, 1, 'Balkong', 2);
@@ -423,7 +425,7 @@ INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (261, 14, 4, 'Ba
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (262, 15, 4, 'Balkong', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (263, 16, 4, 'Balkong', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (264, 17, 4, 'Balkong', 2);
-
+-- Gamlescenen galleri
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (265, 1, 1, 'Galleri', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (266, 2, 1, 'Galleri', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (267, 3, 1, 'Galleri', 2);
@@ -493,8 +495,7 @@ INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (330, 15, 3, 'Ga
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (331, 16, 3, 'Galleri', 2);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (332, 17, 3, 'Galleri', 2);
 
-
--- Hovedscenen
+-- Hovedscenen parkett
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (333, 1, 1, 'Parkett', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (334, 2, 1, 'Parkett', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (335, 3, 1, 'Parkett', 1);
@@ -863,9 +864,6 @@ INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (697, 365, 14, '
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (698, 366, 14, 'Parkett', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (699, 367, 14, 'Parkett', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (700, 368, 14, 'Parkett', 1);
-
-
-
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (701, 369, 14, 'Parkett', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (702, 370, 14, 'Parkett', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (703, 371, 14, 'Parkett', 1);
@@ -998,6 +996,7 @@ INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (833, 501, 18, '
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (834, 502, 18, 'Parkett', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (835, 503, 18, 'Parkett', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (836, 504, 18, 'Parkett', 1);
+-- Hovedscenen galleri
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (837, 505, 1, 'Galleri', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (838, 506, 1, 'Galleri', 1);
 INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES (839, 507, 1, 'Galleri', 1);
