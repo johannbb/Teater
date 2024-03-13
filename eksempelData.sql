@@ -37,7 +37,7 @@ INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Dagfinn Bonde', 11);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Jatgeir Skald', 11);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Sigrid', 6);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Ingeborg', 6);
-INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Guttorm Ingesson', NULL);
+INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Guttorm Ingesson', 8);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Skule Jarl', 3);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Inga frå Vartejg', 2);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Paal Flida', 9);
@@ -46,6 +46,13 @@ INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Gregorius Jonsson', 8);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Margrete', 5);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Biskop Nikolas', 7);
 INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Peter', 12);
+INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Sunniva Du Mond Nordal', 13);
+INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Jo Saberniak', 14);
+INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Marte Steinholt', 15);
+INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Tor Ivar Hagen', 16);
+INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Trond-Ove Skrødal', 17);
+INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Natalie Grøndahl Tangen', 18);
+INSERT INTO Rolle (RolleNavn, SkuespillerID) VALUES ('Åsmund Flaten', 19);
 
 -- AktRolleForhold
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Kongsemnene', 'Håkon Håkonson');
