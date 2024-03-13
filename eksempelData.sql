@@ -98,10 +98,26 @@ INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (5, 'Kongsemnene',
 INSERT INTO Kulisser (KulissID, KulissType, Tittel) VALUES (NULL, NULL, NULL);
 
 -- Ansatt
-INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES ();
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (1, 'Yury', 'Butusov', NULL, 'Fast', 'Regissør');
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (2, 'Aleksandr', 'Shishkinhokusai', NULL, 'Fast', 'Scenograf');
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (3, 'Eivind', 'Myren', NULL, 'Fast', 'Lysdesigner');
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (4, 'Mina', 'Rype Stokke', NULL, 'Fast', 'Dramaturg');
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (5, 'Jonas', 'Corell Petersen', NULL, 'Fast', 'Regissør');
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (6, 'David', 'Gehrt', NULL, 'Fast', 'Scenograf');
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (7, 'Gaute', 'Tønder', NULL, 'Fast', 'Lyddesigner');
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (8, 'Magnus', 'Mikaelsen', NULL, 'Fast', 'Lysdesigner');
+INSERT INTO Ansatt (AnsattID, Fornavn, Etternavn, Epost, AnsattStatus, AnsattType) VALUES (9, 'Kristoffer', 'Spender', NULL, 'Fast', 'Dramaturg');
 
 -- JobberPå
-INSERT INTO JobberPå (AnsattID, Tittel) VALUES ();
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (1, 'Kongsemnene');
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (2, 'Kongsemnene');
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (3, 'Kongsemnene');
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (4, 'Kongsemnene');
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (5, 'Størst av alt er kjærligheten');
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (6, 'Størst av alt er kjærligheten');
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (7, 'Størst av alt er kjærligheten');
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (8, 'Størst av alt er kjærligheten');
+INSERT INTO JobberPå (AnsattID, Tittel) VALUES (9, 'Størst av alt er kjærligheten');
 
 -- Sal
 INSERT INTO Sal (SalID, Navn, AntallPlasser) VALUES (1, 'Hovedscenen', 516);
