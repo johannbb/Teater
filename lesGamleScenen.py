@@ -12,4 +12,7 @@ with open('gamle-scene.txt', 'r') as file:
             row += 1
             for seat, value in enumerate(line, start=1):
                 id += 1
-                print(f"INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES ({id}, {seat}, {row}, '{area}', {2});")
+                # check if seatvalue is 1
+
+                if value == '1':
+                  print(f"INSERT INTO Stol (StolID, StolNr, RadNr, Område, SalID) VALUES ({id}, {seat}, {row}, '{area}', {2});")

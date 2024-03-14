@@ -138,8 +138,8 @@ CREATE TABLE Billett (
     FOREIGN KEY (BillettTypeID) REFERENCES BillettType(BillettTypeID)
 );
 
--- Oppretter Billettkjøp-tabellen
-CREATE TABLE Billettkjøp (
+-- Oppretter Billettkjop-tabellen
+CREATE TABLE Billettkjop (
     KundeID INT,
     BillettID INT,
     Dato DATE NOT NULL,
