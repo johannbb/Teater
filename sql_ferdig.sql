@@ -55,8 +55,8 @@ CREATE TABLE Ansatt (
     AnsattType VARCHAR(50) NOT NULL
 );
 
--- Oppretter JobberPå-tabellen
-CREATE TABLE JobberPå (
+-- Oppretter JobberPaa-tabellen
+CREATE TABLE JobberPaa (
     AnsattID INT,
     Tittel VARCHAR(255),
     PRIMARY KEY (AnsattID, Tittel),
@@ -94,7 +94,7 @@ CREATE TABLE Stol (
     StolID INT PRIMARY KEY,
     StolNr INT NOT NULL,
     RadNr INT NOT NULL,
-    Område VARCHAR(50) NOT NULL,
+    Omraade VARCHAR(50) NOT NULL,
     SalID INT,
     FOREIGN KEY (SalID) REFERENCES Sal(SalID)
 );
