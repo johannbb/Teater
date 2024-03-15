@@ -104,15 +104,61 @@ def retrieveAvailableSeatsFromHovedScenen():
 
 ## HUSKE Å LEGGE TIL RIKTIG DATO PÅ BillettKjop
 
+def getAvailableRows():
+  query = """
+    SELECT Stol.RadNr, Stol.Omraade, Stol.SalID, COUNT(*) AS AntallBilletter
+    FROM Billett
+    JOIN Stol ON Billett.StolID = Stol.StolID
+    WHERE Billett.Dato = '2024-02-03'
+    AND Billett.BillettTypeID IN (
+        SELECT BillettTypeID
+        FROM BillettType
+        WHERE BillettTypeID = 1
+    )
+    AND Billett.BillettID NOT IN (
+        SELECT BillettID
+        FROM Billettkjop
+    )
+    AND Billett.Tittel = 'Storst av alt er kjaerligheten'
+    GROUP BY Stol.RadNr, Stol.Omraade
+    HAVING COUNT(*) > 8;
+    """
+    
+  cursor.execute(query)
+  rows = cursor.fetchall()
+  return rows
+
+def buyTickets(amountOfTickets, availableRows):
+  
+  query = """
+    SELECT Billett.BillettID
+    FROM Billett
+    JOIN Stol ON Billett.StolID = Stol.StolID
+    WHERE Stol.RadNr = ?
+    AND Stol.Omraade = ?
+    AND Stol.SalID = ?
+    LIMIT 9;
+    """
+  cursor.execute(query, (availableRows[0][0], availableRows[0][1], availableRows[0][2]))
+  tickets = cursor.fetchall()
+  dato = '2024-02-03'
+
+  price = 0
+  for ticket in tickets:
+    cursor.execute(f"INSERT INTO Billettkjop (KundeID, BillettID, Dato, Tid) VALUES ({1}, {ticket[0]}, '{dato}', '{formatted_time}');")
 
 def retrieveSeats():
     retrieveAvailableSeatsFromGamleScenen()
     retrieveAvailableSeatsFromHovedScenen()
 
+def findSeatsAndTickets():
+    availableRows = getAvailableRows()
+    buyTickets(9, availableRows)
 # Lukker databaseforbindelsen
                   
-createTable()
-insertExampleData()
-retrieveSeats()
+#createTable()
+#insertExampleData()
+#retrieveSeats()
+findSeatsAndTickets()
 con.commit()
 con.close()
