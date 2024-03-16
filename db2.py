@@ -128,15 +128,19 @@ def getAvailableRows():
   rows = cursor.fetchall()
   return rows
 
-def buyTickets(amountOfTickets, availableRows):
-  
+def buyTickets(availableRows):
   query = """
-    SELECT Billett.BillettID
+    SELECT Billett.BillettID, Pris.Pris
     FROM Billett
     JOIN Stol ON Billett.StolID = Stol.StolID
+    JOIN Pris ON Billett.Tittel = Pris.Tittel AND Billett.BillettTypeID = Pris.BillettTypeID
     WHERE Stol.RadNr = ?
     AND Stol.Omraade = ?
     AND Stol.SalID = ?
+    AND Billett.BillettTypeID IN (
+        SELECT BillettTypeID
+        FROM BillettType
+        WHERE BillettTypeID = 1)
     LIMIT 9;
     """
   cursor.execute(query, (availableRows[0][0], availableRows[0][1], availableRows[0][2]))
@@ -146,6 +150,9 @@ def buyTickets(amountOfTickets, availableRows):
   price = 0
   for ticket in tickets:
     cursor.execute(f"INSERT INTO Billettkjop (KundeID, BillettID, Dato, Tid) VALUES ({1}, {ticket[0]}, '{dato}', '{formatted_time}');")
+    price += ticket[1]
+
+  print(price)
 
 def retrieveSeats():
     retrieveAvailableSeatsFromGamleScenen()
@@ -153,12 +160,28 @@ def retrieveSeats():
 
 def findSeatsAndTickets():
     availableRows = getAvailableRows()
-    buyTickets(9, availableRows)
+    buyTickets(availableRows)
+  
+def getForestillingAndTicketsSold(dato):
+  query =  """
+    SELECT Forestilling.Dato, Forestilling.Tittel, COALESCE(COUNT(Billettkjop.BillettID), 0) AS antallSolgt  
+    FROM Forestilling
+    LEFT JOIN Billett ON Forestilling.Tittel = Billett.Tittel AND Forestilling.Dato = Billett.Dato
+    LEFT JOIN Billettkjop ON Billettkjop.BillettID = Billett.BillettID
+    WHERE Forestilling.Dato = ?
+    GROUP BY Forestilling.Dato, Forestilling.Tittel;
+    """
+  cursor.execute(query, (dato, ))
+  forestillinger = cursor.fetchall()
+  
+  for forestilling in forestillinger:
+    print(f'Dato: {forestilling[0]} Tittel: {forestilling[1]} Antall solgt: {forestilling[2]}')
 # Lukker databaseforbindelsen
                   
-#createTable()
-#insertExampleData()
-#retrieveSeats()
+createTable()
+insertExampleData()
+retrieveSeats()
 findSeatsAndTickets()
+getForestillingAndTicketsSold('2024-02-03')
 con.commit()
 con.close()
