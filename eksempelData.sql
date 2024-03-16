@@ -98,6 +98,13 @@ INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (5, 'Kongsemnene',
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (5, 'Kongsemnene', 'Margrete');
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (5, 'Kongsemnene', 'Biskop Nikolas');
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (5, 'Kongsemnene', 'Peter');
+INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Storst av alt er kjaerligheten', 'Sunniva Du Mond Nordal');
+INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Storst av alt er kjaerligheten', 'Jo Saberniak');
+INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Storst av alt er kjaerligheten', 'Marte Steinholt');
+INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Storst av alt er kjaerligheten', 'Tor Ivar Hagen');
+INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Storst av alt er kjaerligheten', 'Trond-Ove Skrodal');
+INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Storst av alt er kjaerligheten', 'Natalie Grondahl Tangen');
+INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Storst av alt er kjaerligheten', 'aasmund Flaten');
 
 
 -- Kulisser
