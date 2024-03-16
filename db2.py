@@ -176,6 +176,37 @@ def getForestillingAndTicketsSold(dato):
   
   for forestilling in forestillinger:
     print(f'Dato: {forestilling[0]} Tittel: {forestilling[1]} Antall solgt: {forestilling[2]}')
+    
+def actorsInShow(tittel):
+  query = """
+    SELECT AktRolleForhold.Tittel, AktRolleForhold.RolleNavn, Skuespiller.Fornavn, Skuespiller.Etternavn
+    FROM AktRolleForhold
+    JOIN Rolle ON AktRolleForhold.RolleNavn = Rolle.RolleNavn
+    JOIN Skuespiller ON Skuespiller.SkuespillerID = Rolle.SkuespillerID
+    WHERE AktRolleForhold.Tittel = ?;
+    """
+  cursor.execute(query, (tittel, ))
+  actorsInShow = cursor.fetchall()
+  
+  for actor in actorsInShow:
+    print(f'Tittel: {actor[0]} Rollenavn: {actor[1]} Skuespillernavn: {actor[2]} {actor[3]} ')
+
+def bestSold():
+  query = """
+    SELECT Forestilling.Dato, Forestilling.Tittel, COALESCE(COUNT(Billettkjop.BillettID), 0) AS antallSolgt  
+    FROM Forestilling
+    LEFT JOIN Billett ON Forestilling.Tittel = Billett.Tittel AND Forestilling.Dato = Billett.Dato
+    LEFT JOIN Billettkjop ON Billettkjop.BillettID = Billett.BillettID
+    GROUP BY Forestilling.Dato, Forestilling.Tittel
+    ORDER BY antallSolgt DESC;
+    """
+  
+  cursor.execute(query)
+  bestSold = cursor.fetchall()
+  
+  for show in bestSold:
+    print(f'Dato: {show[0]} Tittel: {show[1]} Antall solgte billetter: {show[2]}')
+
 # Lukker databaseforbindelsen
                   
 createTable()
@@ -183,5 +214,7 @@ insertExampleData()
 retrieveSeats()
 findSeatsAndTickets()
 getForestillingAndTicketsSold('2024-02-03')
+actorsInShow('Storst av alt er kjaerligheten')
+bestSold()
 con.commit()
 con.close()
