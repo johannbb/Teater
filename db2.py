@@ -207,6 +207,29 @@ def bestSold():
   for show in bestSold:
     print(f'Dato: {show[0]} Tittel: {show[1]} Antall solgte billetter: {show[2]}')
 
+def findColleagues(fornavn, etternavn):
+  query = """
+    SELECT DISTINCT s1.Fornavn AS 'Fornavn1', s1.Etternavn AS 'Etternavn1', 
+                s2.Fornavn AS 'Fornavn2', s2.Etternavn AS 'Etternavn2', 
+                a.Tittel AS 'Teaterstykke'
+    FROM Skuespiller s1
+    JOIN Rolle r1 ON s1.SkuespillerID = r1.SkuespillerID
+    JOIN AktRolleForhold arf1 ON r1.RolleNavn = arf1.RolleNavn
+    JOIN Akt a ON arf1.AktNr = a.AktNr AND arf1.Tittel = a.Tittel
+    JOIN AktRolleForhold arf2 ON a.AktNr = arf2.AktNr AND a.Tittel = arf2.Tittel
+    JOIN Rolle r2 ON arf2.RolleNavn = r2.RolleNavn
+    JOIN Skuespiller s2 ON r2.SkuespillerID = s2.SkuespillerID
+    WHERE s1.Fornavn = ?
+    AND s1.Etternavn = ?
+    AND s2.SkuespillerID <> s1.SkuespillerID;
+    """
+  cursor.execute(query, (fornavn, etternavn))
+  colleagues = cursor.fetchall()
+  
+  for colleague in colleagues:
+    print(f'Skuespiller: {colleague[0]} {colleague[1]} Kollega: {colleague[2]} {colleague[3]} Teaterstykke: {colleague[4]}')
+    
+    
 # Lukker databaseforbindelsen
                   
 createTable()
@@ -216,5 +239,6 @@ findSeatsAndTickets()
 getForestillingAndTicketsSold('2024-02-03')
 actorsInShow('Storst av alt er kjaerligheten')
 bestSold()
+findColleagues('Arturo', 'Scotti')
 con.commit()
 con.close()
