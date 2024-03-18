@@ -65,6 +65,7 @@ INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Kongsemnene',
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Kongsemnene', 'Margrete');
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Kongsemnene', 'Biskop Nikolas');
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Kongsemnene', 'Peter');
+INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (1, 'Kongsemnene', 'Guttorm Ingesson');
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (2, 'Kongsemnene', 'Haakon Haakonson');
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (2, 'Kongsemnene', 'Dagfinn Bonde');
 INSERT INTO AktRolleForhold (AktNr, Tittel, RolleNavn) VALUES (2, 'Kongsemnene', 'Sigrid');
