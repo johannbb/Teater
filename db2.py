@@ -200,7 +200,7 @@ def getForestillingAndTicketsSold(dato):
     
 def actorsInShow(tittel):
   query = """
-    SELECT AktRolleForhold.Tittel, AktRolleForhold.RolleNavn, Skuespiller.Fornavn, Skuespiller.Etternavn
+    SELECT DISTINCT AktRolleForhold.Tittel, AktRolleForhold.RolleNavn, Skuespiller.Fornavn, Skuespiller.Etternavn
     FROM AktRolleForhold
     JOIN Rolle ON AktRolleForhold.RolleNavn = Rolle.RolleNavn
     JOIN Skuespiller ON Skuespiller.SkuespillerID = Rolle.SkuespillerID
