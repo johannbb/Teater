@@ -147,12 +147,33 @@ def buyTickets(availableRows):
   tickets = cursor.fetchall()
   dato = '2024-02-03'
 
-  price = 0
   for ticket in tickets:
     cursor.execute(f"INSERT INTO Billettkjop (KundeID, BillettID, Dato, Tid) VALUES ({1}, {ticket[0]}, '{dato}', '{formatted_time}');")
-    price += ticket[1]
+  
+  price = 0
 
-  print(price)
+  query = """
+    SELECT SUM(subquery.Pris)
+    FROM (
+    SELECT Pris.Pris
+    FROM Billett
+    JOIN Stol ON Billett.StolID = Stol.StolID
+    JOIN Pris ON Billett.Tittel = Pris.Tittel AND Billett.BillettTypeID = Pris.BillettTypeID
+    WHERE Stol.RadNr = ?
+    AND Stol.Omraade = ?
+    AND Stol.SalID = ?
+    AND Billett.BillettTypeID IN (
+        SELECT BillettTypeID
+        FROM BillettType
+        WHERE BillettTypeID = 1)
+    LIMIT 9
+    ) AS subquery;
+    """
+
+  cursor.execute(query, (availableRows[0][0], availableRows[0][1], availableRows[0][2]))
+  price = cursor.fetchall()
+
+  print(price[0][0])
 
 def retrieveSeats():
     retrieveAvailableSeatsFromGamleScenen()
