@@ -251,15 +251,42 @@ def findColleagues(fornavn, etternavn):
     print(f'Skuespiller: {colleague[0]} {colleague[1]} Kollega: {colleague[2]} {colleague[3]} Teaterstykke: {colleague[4]}')
     
     
+while True:
+  print("Choose a method to run:")
+  print("1. createTable, insertExampleData, retrieveSeats")
+  print("2. findSeatsAndTickets")
+  print("3. getForestillingAndTicketsSold")
+  print("4. actorsInShow")
+  print("5. bestSold")
+  print("6. findColleagues")
+  print("7. Exit")
+
+  choice = input("Enter the number of your choice: ")
+
+  if choice == '1':
+      createTable()
+      insertExampleData()
+      retrieveSeats()
+  elif choice == '2':
+      findSeatsAndTickets()
+  elif choice == '3':
+      date = input("Enter date (YYYY-MM-DD): ")
+      getForestillingAndTicketsSold(date)
+  elif choice == '4':
+      show = input("Enter show name: ")
+      actorsInShow(show)
+  elif choice == '5':
+      bestSold()
+  elif choice == '6':
+      fornavn = input("Enter first name: ")
+      etternavn = input("Enter last name: ")
+      findColleagues(fornavn, etternavn)
+  elif choice == '7':
+    print("Exiting")
+    break
+  else:
+    print("Invalid choice.")
+
 # Lukker databaseforbindelsen
-                  
-createTable()
-insertExampleData()
-retrieveSeats()
-findSeatsAndTickets()
-getForestillingAndTicketsSold('2024-02-03')
-actorsInShow('Storst av alt er kjaerligheten')
-bestSold()
-findColleagues('Arturo', 'Scotti')
 con.commit()
 con.close()
