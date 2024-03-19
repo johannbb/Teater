@@ -291,7 +291,7 @@ while True:
           continue
       buyTickets(availableRows)
       print("9 kjøp er lagt til i billettkjøp")
-      print(f'Totalpris: {calculateTotalPrice(availableRows)}')
+      print(f'Totalpris: {calculateTotalPrice(availableRows)} kr')
   elif choice == '4':
       date = input("Skriv inn ønsket dato (YYYY-MM-DD): ")
       getForestillingAndTicketsSold(date)
