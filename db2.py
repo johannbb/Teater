@@ -6,7 +6,7 @@ cursor = con.cursor()
 current_time = datetime.datetime.now()
 formatted_time = current_time.strftime("%H:%M")
 
-
+#BRUKERHISTORIE 1
 def createTable():    
   # aapner filen og splitter paa semikolon
   with open('sql_ferdig.sql', 'r') as sql_file:
@@ -31,8 +31,8 @@ def insertExampleData():
       except sqlite3.OperationalError as e:
           print('Command skipped: ', e)
 
+#BRUKERHISTORIE 2
 def retrieveAvailableSeatsFromGamleScenen():
-    
   # Henter data fra gamle-scene
   with open('gamle-scene.txt', 'r') as file:
       lines = file.readlines()
@@ -61,14 +61,12 @@ def retrieveAvailableSeatsFromGamleScenen():
                   seatId += 1
                   billettID += 1
                   stolID += 1
-                  print("billettId: " + str(billettID) + "verdi: " + str(value))
                   cursor.execute(f"INSERT INTO Billett (BillettID, StolID, Tittel, Dato, BillettTypeID) VALUES ({billettID}, {seatId}, '{tittel}', '{dato[1]}', {1});")
                   cursor.execute(f"INSERT INTO Stol (StolID, StolNr, RadNr, Omraade, SalID) VALUES ({stolID}, {seat}, {row}, '{area}', {2});")
                   if value == '1':
                       cursor.execute(f"INSERT INTO Billettkjop (KundeID, BillettID, Dato, Tid) VALUES ({1}, {billettID}, '{dato[1]}', '{formatted_time}');")
 
 def retrieveAvailableSeatsFromHovedScenen():
-  
   # Henter data fra gamle-scene
   with open('hovedscenen.txt', 'r') as file:
       lines = file.readlines()
@@ -96,14 +94,18 @@ def retrieveAvailableSeatsFromHovedScenen():
                   billettID += 1
                   stolID += 1
                   seat += 1
-                  print("billettId: " + str(billettID) + "verdi: " + str(value))
                   cursor.execute(f"INSERT INTO Billett (BillettID, StolID, Tittel, Dato, BillettTypeID) VALUES ({billettID}, {seatId}, '{tittel}', '{dato[1]}', {1});")
                   cursor.execute(f"INSERT INTO Stol (StolID, StolNr, RadNr, Omraade, SalID) VALUES ({stolID}, {seat}, {row}, '{area}', {1});")
                   if value[1] == '1':
                       cursor.execute(f"INSERT INTO Billettkjop (KundeID, BillettID, Dato, Tid) VALUES ({1}, {billettID}, '{dato[1]}', '{formatted_time}');")
 
-## HUSKE Å LEGGE TIL RIKTIG DATO PÅ BillettKjop
+def retrieveSeats():
+    retrieveAvailableSeatsFromGamleScenen()
+    retrieveAvailableSeatsFromHovedScenen()
 
+
+#BRUKERHISTORIE 3
+currentRow = 0
 def getAvailableRows():
   query = """
     SELECT Stol.RadNr, Stol.Omraade, Stol.SalID, COUNT(*) AS AntallBilletter
@@ -129,6 +131,11 @@ def getAvailableRows():
   return rows
 
 def buyTickets(availableRows):
+  global currentRow
+  if currentRow >= len(availableRows):
+    print("Ingen flere tilgjengelige rader for å kjøpe billetter.")
+    return
+
   query = """
     SELECT Billett.BillettID, Pris.Pris
     FROM Billett
@@ -141,17 +148,21 @@ def buyTickets(availableRows):
         SELECT BillettTypeID
         FROM BillettType
         WHERE BillettTypeID = 1)
+    AND Billett.BillettID NOT IN (
+        SELECT BillettID
+        FROM Billettkjop)
     LIMIT 9;
     """
-  cursor.execute(query, (availableRows[0][0], availableRows[0][1], availableRows[0][2]))
+  cursor.execute(query, (availableRows[currentRow][0], availableRows[currentRow][1], availableRows[currentRow][2]))
   tickets = cursor.fetchall()
   dato = '2024-02-03'
 
   for ticket in tickets:
     cursor.execute(f"INSERT INTO Billettkjop (KundeID, BillettID, Dato, Tid) VALUES ({1}, {ticket[0]}, '{dato}', '{formatted_time}');")
-  
-  price = 0
+  currentRow += 1
 
+def calculateTotalPrice(availableRows):
+  global currentRow
   query = """
     SELECT SUM(subquery.Pris)
     FROM (
@@ -170,19 +181,17 @@ def buyTickets(availableRows):
     ) AS subquery;
     """
 
-  cursor.execute(query, (availableRows[0][0], availableRows[0][1], availableRows[0][2]))
+  cursor.execute(query, (availableRows[currentRow][0], availableRows[currentRow][1], availableRows[currentRow][2]))
   price = cursor.fetchall()
 
-  print(price[0][0])
-
-def retrieveSeats():
-    retrieveAvailableSeatsFromGamleScenen()
-    retrieveAvailableSeatsFromHovedScenen()
-
+  return price[0][0]
+  
 def findSeatsAndTickets():
     availableRows = getAvailableRows()
     buyTickets(availableRows)
-  
+    calculateTotalPrice(availableRows)
+
+#BRUKERHISTORIE 4
 def getForestillingAndTicketsSold(dato):
   query =  """
     SELECT Forestilling.Dato, Forestilling.Tittel, COALESCE(COUNT(Billettkjop.BillettID), 0) AS antallSolgt  
@@ -197,7 +206,8 @@ def getForestillingAndTicketsSold(dato):
   
   for forestilling in forestillinger:
     print(f'Dato: {forestilling[0]} Tittel: {forestilling[1]} Antall solgt: {forestilling[2]}')
-    
+
+#BRUKERHISTORIE 5
 def actorsInShow(tittel):
   query = """
     SELECT DISTINCT AktRolleForhold.Tittel, AktRolleForhold.RolleNavn, Skuespiller.Fornavn, Skuespiller.Etternavn
@@ -212,6 +222,7 @@ def actorsInShow(tittel):
   for actor in actorsInShow:
     print(f'Tittel: {actor[0]} Rollenavn: {actor[1]} Skuespillernavn: {actor[2]} {actor[3]} ')
 
+#BRUKERHISTORIE 6
 def bestSold():
   query = """
     SELECT Forestilling.Dato, Forestilling.Tittel, COALESCE(COUNT(Billettkjop.BillettID), 0) AS antallSolgt  
@@ -228,6 +239,7 @@ def bestSold():
   for show in bestSold:
     print(f'Dato: {show[0]} Tittel: {show[1]} Antall solgte billetter: {show[2]}')
 
+#BRUKERHISTORIE 7
 def findColleagues(fornavn, etternavn):
   query = """
     SELECT DISTINCT s1.Fornavn AS 'Fornavn1', s1.Etternavn AS 'Etternavn1', 
@@ -249,39 +261,50 @@ def findColleagues(fornavn, etternavn):
   
   for colleague in colleagues:
     print(f'Skuespiller: {colleague[0]} {colleague[1]} Kollega: {colleague[2]} {colleague[3]} Teaterstykke: {colleague[4]}')
-    
-    
-while True:
-  print("Choose a method to run:")
-  print("1. createTable, insertExampleData, retrieveSeats")
-  print("2. findSeatsAndTickets")
-  print("3. getForestillingAndTicketsSold")
-  print("4. actorsInShow")
-  print("5. bestSold")
-  print("6. findColleagues")
-  print("7. Exit")
 
-  choice = input("Enter the number of your choice: ")
+
+while True:
+  print("Velg en operasjon å utføre:")
+  print("1. Brukerhistorie 1")
+  print("2. Brukerhistorie 2")
+  print("3. Brukerhistorie 3")
+  print("4. Brukerhistorie 4")
+  print("5. Brukerhistorie 5")
+  print("6. Brukerhistorie 6")
+  print("7. Brukerhistorie 7")
+  print("8. Exit")
+ 
+
+  choice = input("Velg et tall for å utføre en operasjon: ")
 
   if choice == '1':
       createTable()
       insertExampleData()
-      retrieveSeats()
+      print("Databasen er opprettet og data er satt inn")
   elif choice == '2':
-      findSeatsAndTickets()
+     retrieveSeats()
+     print("Stoler er registrert i systemet")
   elif choice == '3':
-      date = input("Enter date (YYYY-MM-DD): ")
-      getForestillingAndTicketsSold(date)
+      availableRows = getAvailableRows()
+      if not availableRows:
+          print("Ingen tilgjengelige rader.")
+          continue
+      buyTickets(availableRows)
+      print("9 kjøp er lagt til i billettkjøp")
+      print(f'Totalpris: {calculateTotalPrice(availableRows)}')
   elif choice == '4':
-      show = input("Enter show name: ")
-      actorsInShow(show)
+      date = input("Skriv inn ønsket dato (YYYY-MM-DD): ")
+      getForestillingAndTicketsSold(date)
   elif choice == '5':
-      bestSold()
+      show = input("Skriv inn tittel på forestilling (uten æøå): ")
+      actorsInShow(show)
   elif choice == '6':
-      fornavn = input("Enter first name: ")
-      etternavn = input("Enter last name: ")
-      findColleagues(fornavn, etternavn)
+      bestSold()
   elif choice == '7':
+      fornavn = input("Skriv inn fornavn: ")
+      etternavn = input("Skriv inn etternavn: ")
+      findColleagues(fornavn, etternavn)
+  elif choice == '8':
     print("Exiting")
     break
   else:
