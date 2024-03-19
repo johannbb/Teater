@@ -67,7 +67,7 @@ def retrieveAvailableSeatsFromGamleScenen():
                       cursor.execute(f"INSERT INTO Billettkjop (KundeID, BillettID, Dato, Tid) VALUES ({1}, {billettID}, '{dato[1]}', '{formatted_time}');")
 
 def retrieveAvailableSeatsFromHovedScenen():
-  # Henter data fra gamle-scene
+  # Henter data fra hovedscene
   with open('hovedscenen.txt', 'r') as file:
       lines = file.readlines()
       row = 0
