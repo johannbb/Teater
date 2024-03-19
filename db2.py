@@ -185,11 +185,6 @@ def calculateTotalPrice(availableRows):
   price = cursor.fetchall()
 
   return price[0][0]
-  
-def findSeatsAndTickets():
-    availableRows = getAvailableRows()
-    buyTickets(availableRows)
-    calculateTotalPrice(availableRows)
 
 #BRUKERHISTORIE 4
 def getForestillingAndTicketsSold(dato):
